@@ -39,4 +39,46 @@ There are following Databases installed:
 * PostgreSQL 8.4
 
 
+****************
+Managing Jenkins
+****************
+
+Update Jenkins
+==============
+
+Log in to the server over ssh and run:
+
+* ``sudo apt-get update``
+* ``sudo apt-get install jenkins``
+
+Make sure Jenkins reboots after the installation.
+
+Please do not try to upgrade Jenkins from within Jenkins, this does not work 
+when Jenkins is installed using apt-get.
+
+
+Udate/install plugins
+=====================
+
+* Go to http://ci.django-cms.org/pluginManager/
+* Do the changes (**note**: Please do not select the "Restart Jenkins when
+  installation is complete and no jobs are running" option, as it sometimes
+  causes problems)
+* After everything went through, log into the server and run
+  ``sudo /etc/init.d/jenkins restart``
+
+
 .. _Jenkins: http://jenkins-ci.org
+
+
+*******
+Contact
+*******
+
+The main contact for the server is Jonas Obrist aka ojii. You can find him:
+
+* IRC: irc.freenode.net in #django-cms and #django-dev as ojii
+* Github: https://github.com/ojii
+* Twitter: https://twitter.com/ojiidotch
+* E-Mail: jonas.obrist@divio.ch
+
