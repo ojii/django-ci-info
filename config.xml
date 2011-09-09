@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<matrix-project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+    </hudson.security.AuthorizationMatrixProperty>
+  </properties>
+  <scm class="hudson.scm.SubversionSCM">
+    <locations>
+      <hudson.scm.SubversionSCM_-ModuleLocation>
+        <remote>http://code.djangoproject.com/svn/django/trunk</remote>
+        <local>.</local>
+      </hudson.scm.SubversionSCM_-ModuleLocation>
+    </locations>
+    <excludedRegions></excludedRegions>
+    <includedRegions></includedRegions>
+    <excludedUsers></excludedUsers>
+    <excludedRevprop></excludedRevprop>
+    <excludedCommitMessages></excludedCommitMessages>
+    <workspaceUpdater class="hudson.scm.subversion.UpdateWithRevertUpdater"/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector">
+    <hudson.triggers.SCMTrigger>
+      <spec>@hourly</spec>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <axes>
+    <hudson.matrix.TextAxis>
+      <name>database</name>
+      <values>
+        <string>sqlite3</string>
+        <string>postgres</string>
+        <string>mysql</string>
+        <string>oracle</string>
+      </values>
+    </hudson.matrix.TextAxis>
+    <hudson.matrix.TextAxis>
+      <name>python</name>
+      <values>
+        <string>python2.5</string>
+        <string>python2.6</string>
+        <string>python2.7</string>
+      </values>
+    </hudson.matrix.TextAxis>
+  </axes>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>find . -name &apos;*.pyc&apos; -delete
+cd tests
+cp -r $HOME/djangodata/* .</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command># Jenkins runs the shell with -e, but we don&apos;t want to exit
+# without cleaning up.
+set +e
+
+cd tests
+export django_admin=../django/bin/django-admin.py
+export PYTHONPATH=..:.
+export PY_VERSION=`echo $python | sed -n &apos;s/python\([0-9]\)\.\([0-9]\)/\1\2/p&apos;`
+
+if [ &quot;$database&quot; = &apos;oracle&apos; ]; then
+    . /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh
+fi
+
+if [ -f &quot;setup_$database.sql&quot; ]; then
+    sed &quot;s/%PY_VERSION%/$PY_VERSION/g&quot; setup_$database.sql | $python $django_admin dbshell --settings=test_$database
+fi
+
+$python runtests.py --settings=test_$database --noinput
+retcode=$?
+
+if [ -f &quot;teardown_$database.sql&quot; ]; then
+    sed &quot;s/%PY_VERSION%/$PY_VERSION/g&quot; teardown_$database.sql | $python $django_admin dbshell --settings=test_$database
+fi
+
+exit $retcode</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.tasks.junit.JUnitResultArchiver>
+      <testResults>**/tests/TEST-*.xml</testResults>
+      <keepLongStdio>false</keepLongStdio>
+      <testDataPublishers/>
+    </hudson.tasks.junit.JUnitResultArchiver>
+    <hudson.plugins.ircbot.IrcPublisher>
+      <targets>
+        <hudson.plugins.im.GroupChatIMMessageTarget>
+          <name>#django-dev</name>
+          <password></password>
+        </hudson.plugins.im.GroupChatIMMessageTarget>
+      </targets>
+      <strategy>FAILURE_AND_FIXED</strategy>
+      <notifyOnBuildStart>false</notifyOnBuildStart>
+      <notifySuspects>false</notifySuspects>
+      <notifyCulprits>false</notifyCulprits>
+      <notifyFixers>false</notifyFixers>
+      <notifyUpstreamCommitters>false</notifyUpstreamCommitters>
+      <buildToChatNotifier class="hudson.plugins.im.build_notify.SummaryOnlyBuildToChatNotifier"/>
+      <matrixMultiplier>ONLY_CONFIGURATIONS</matrixMultiplier>
+      <channels/>
+    </hudson.plugins.ircbot.IrcPublisher>
+  </publishers>
+  <buildWrappers/>
+  <runSequentially>false</runSequentially>
+  <touchStoneResultCondition>
+    <name>SUCCESS</name>
+    <ordinal>0</ordinal>
+    <color>BLUE</color>
+  </touchStoneResultCondition>
+</matrix-project>
