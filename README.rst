@@ -40,6 +40,17 @@ There are following Databases installed:
 * PostgreSQL 8.4
 
 
+********
+Settings
+********
+
+The Django test settings were slightly modified.
+
+The ``jenkins_test_runner.JenkinsDjangoTestSuiteRunner`` is used to generate
+Jenkins compatible XML reports of the test runs.
+
+The database tables are namespaced by Python version.
+
 ****************
 Managing Jenkins
 ****************
