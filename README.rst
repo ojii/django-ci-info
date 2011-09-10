@@ -38,6 +38,17 @@ There are following Databases installed:
 
 * MySQL 5.1
 * PostgreSQL 8.4
+* Oracle 11g
+
+Postgres
+========
+
+We turned ``fs_sync`` to ``off`` to speed things up.
+
+Oracle
+======
+
+Is running in ramfs to make it somewhat fast.
 
 
 ********
