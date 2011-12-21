@@ -103,5 +103,5 @@ The main contact for the server is Jonas Obrist aka ojii. You can find him:
 * IRC: irc.freenode.net in #django-cms and #django-dev as ojii
 * Github: https://github.com/ojii
 * Twitter: https://twitter.com/ojiidotch
-* E-Mail: jonas.obrist@divio.ch
+* E-Mail: ojiidotch@gmail.com
 
