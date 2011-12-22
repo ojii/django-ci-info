@@ -60,7 +60,11 @@ Settings
 The Django test settings were slightly modified.
 
 The ``jenkins_test_runner.JenkinsDjangoTestSuiteRunner`` is used to generate
-Jenkins compatible XML reports of the test runs.
+Jenkins compatible XML reports of the test runs. It's neccessary to patch the
+xmlrunner to import ``unittest`` v2 from django instead of v1 from the stdlib.
+Replacing ``from unittest`` with ``from django.utils.unitest`` in 
+``xmlrunner/__init__.py`` seems to work for now. If this is not done ``SkipTest``
+exceptions are not catched by the testrunner!
 
 The database tables are namespaced by Python version.
 
