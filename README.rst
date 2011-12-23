@@ -30,7 +30,7 @@ All of them have following packages installed globally:
 * psycopg2 2.4.2
 * virtualenv 1.6.4
 * setuptools 0.6c11
-* selenium 2.15.0 (except for python 2.5)
+* selenium 2.10.0 (except for python 2.5) (not using 2.15.0 since according to cramm it causes issues)
 
 *********
 Databases
