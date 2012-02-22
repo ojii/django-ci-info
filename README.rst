@@ -99,6 +99,15 @@ Udate/install plugins
 
 .. _Jenkins: http://jenkins-ci.org
 
+****
+Misc
+****
+
+Also installed:
+
+* Firefox 10 (for selenium tests)
+* Chromium 18 and it's webdriver (for selenium tests)
+* vnc4server so jenkins can run selenium tests headless
 
 *******
 Contact
