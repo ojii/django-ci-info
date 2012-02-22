@@ -7,7 +7,7 @@ General
 *******
 
 * The continouos integration is powered by `Jenkins`_.
-* The server is running "Linux Ubuntu-1104-natty-64-minimal 2.6.38-8-server #42-Ubuntu SMP Mon Apr 11 03:49:04 UTC 2011 x86_64 x86_64 x86_64 GNU/Linux".
+* The server is running "Linux ci.django-cms.org 2.6.38-12-server #51-Ubuntu SMP Wed Sep 28 16:07:08 UTC 2011 x86_64 x86_64 x86_64 GNU/Linux".
 * The server is an EQ4 dedicated server hosted by hetzner.de, sponsored by divio.ch.
 * Jenkins is running behind a nginx server
 
