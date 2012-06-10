@@ -18,7 +18,6 @@ Python
 
 There are following Python versions installed:
 
-* Python 2.5.5
 * Python 2.6.6
 * Python 2.7.1+
 * PyPy 1.7
@@ -30,7 +29,8 @@ All of them have following packages installed globally:
 * psycopg2 2.4.2
 * virtualenv 1.6.4
 * setuptools 0.6c11
-* selenium 2.10.0 (except for python 2.5) (not using 2.15.0 since according to cramm it causes issues)
+* selenium 2.10.0 (not using 2.15.0 since according to cramm it causes issues)
+* PyYAML 3.10
 
 *********
 Databases
@@ -40,18 +40,11 @@ There are following Databases installed:
 
 * MySQL 5.1
 * PostgreSQL 8.4
-* Oracle 11g
 
 Postgres
 ========
 
 We turned ``fs_sync`` to ``off`` to speed things up.
-
-Oracle
-======
-
-Is running in ramfs to make it somewhat fast.
-
 
 ********
 Settings
