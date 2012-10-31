@@ -20,9 +20,7 @@ There are following Python versions installed:
 
 * Python 2.6.6
 * Python 2.7.1+
-* Python 3.2
-
-Python 3.2 is patched with http://hg.python.org/cpython/rev/2de45ced8291 and http://hg.python.org/cpython/rev/fd4b4650856f/
+* Python 3.2 (email package from 3.2.3, effectively raising the required py 3.2 version to 3.2.3)
 
 All of them have following packages installed globally:
 
