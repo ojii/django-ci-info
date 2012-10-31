@@ -22,7 +22,7 @@ There are following Python versions installed:
 * Python 2.7.1+
 * Python 3.2
 
-Python 3.2 is patched with http://hg.python.org/cpython/rev/2de45ced8291
+Python 3.2 is patched with http://hg.python.org/cpython/rev/2de45ced8291 and http://hg.python.org/cpython/rev/fd4b4650856f/
 
 All of them have following packages installed globally:
 
